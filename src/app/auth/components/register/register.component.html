@@ -1,0 +1,177 @@
+<section class="auth vh-100">
+  <div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+      <div class="col-md-8 w-100">
+        <div class="auth-card p-5">
+          <div class="mx-auto w-50 text-center ">
+            <img class="w-75" src="../../assets/img/Auth/logo.svg" alt="">
+          </div>
+          <h1>Register</h1>
+          <p>Welcome Back! Please enter your details</p>
+          <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)">
+
+            <div class="row my-5 justify-content-center">
+              <div class="col-md-2 col-sm-6">
+                <ngx-dropzone class="rounded-circle" [class]="files.length?'border-0':'border-1'" (change)="onSelect($event)">
+                  <ngx-dropzone-label> <i class="fa-upload fa-solid"></i> Upload Your Image here</ngx-dropzone-label>
+
+                  <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" class="rounded-circle m-auto overflow-auto">
+                  </ngx-dropzone-image-preview>
+
+                </ngx-dropzone>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3"  >
+                <div class="input-group  input-group-lg">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+                  <input formControlName="userName" type="text" class="form-control input-lg" placeholder="UserName"
+                    aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <ng-container *ngIf="(userName?.touched||userName?.value)&& userName?.errors" class="invalid">
+                  <p class="text-danger" *ngIf="userName?.getError('required')">Name is Required</p>
+                  <!-- <p class="text-danger" *ngIf="userName?.getError('minlength')">Min Length 3</p> -->
+                  <p class="text-danger" *ngIf="userName?.getError('maxlength')">Max Length 20</p>
+                  <p class="text-danger" *ngIf="userName?.getError('pattern')">The userName must contain characters and end with numbers without spaces </p>
+                </ng-container>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <div class="input-group  input-group-lg">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                  <input formControlName="email" type="email" class="form-control input-lg"
+                    placeholder="Enter your E-mail">
+                </div>
+                <ng-container *ngIf="(email?.touched||email?.value)&& email?.errors" class="invalid">
+                  <p class="text-danger" *ngIf="email?.getError('required')">Email is Required</p>
+                  <p class="text-danger" *ngIf="email?.getError('email')">Email invalid format</p>
+
+                </ng-container>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <div class="input-group input-group-lg">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-globe"></i></span>
+                  <input formControlName="country" type="text" class="form-control input-lg" placeholder="Country">
+                </div>
+                <ng-container class="invalid"*ngIf="(country?.touched||country?.value)&& country?.errors">
+                  <p class="text-danger" *ngIf="country?.getError('required')">country is Required</p>
+                </ng-container>
+              </div>
+
+              <div  class="col-md-6 mb-3">
+                <div class="input-group input-group-lg">
+                  <span class="input-group-text"><i class="fa-solid fa-mobile-screen"></i></span>
+                  <input formControlName="phoneNumber" type="text" class="form-control input-lg"
+                    placeholder="PhoneNumber">
+                </div>
+                <ng-container *ngIf="(phoneNumber?.touched||phoneNumber?.value)&& phoneNumber?.errors" class="invalid">
+                  <p class="text-danger" *ngIf="phoneNumber?.getError('required')">Phone Number is Required</p>
+                  <p class="text-danger" *ngIf="phoneNumber?.getError('pattern')">Accept only Egypt Phone Number </p>
+                </ng-container>
+              </div>
+
+
+              <div  class="col-md-6 mb-3">
+                <div class="password position-relative">
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                    <input [type]="hide?'password':'text'" formControlName="password" class="form-control"
+                      placeholder="Password" aria-label="Password">
+                    <span class="eye position-absolute " (click)="hide=!hide">
+                      <i class="fa-solid" [class]="hide?'fa-eye-slash':'fa-eye'"></i>
+                    </span>
+                  </div>
+                </div>
+                <ng-container class="invalid" *ngIf="password?.touched&& password?.errors">
+                  <p class="text-danger" *ngIf="password?.getError('required')">password is Required</p>
+                  <p class="text-danger" *ngIf="password?.getError('pattern')">password must be at least 8 characters and include both letters and numbers</p>
+                </ng-container>
+              </div>
+
+              <div  class="col-md-6 mb-3">
+                <div class="password position-relative">
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                    <input [type]="hide?'password':'text'" formControlName="confirmPassword" class="form-control"
+                      placeholder="confirmPassword" aria-label="Password" aria-describedby="basic-addon1">
+                    <span class="eye position-absolute " (click)="hide=!hide">
+                      <i class="fa-solid" [class]="hide?'fa-eye-slash':'fa-eye'"></i>
+                    </span>
+                  </div>
+                </div>
+                <ng-container class="invalid" *ngIf="confirmPassword?.touched&& confirmPassword?.errors">
+                  <p class="text-danger" *ngIf="confirmPassword?.getError('required')">confirmPassword is Required</p>
+                  <p class="text-danger" *ngIf="confirmPassword?.errors?.['confirmPassMismatchPass']" >confirm Pass Mismatch Pass</p>
+                </ng-container>
+              </div>
+
+            </div>
+
+            <div class="links d-flex justify-content-between">
+              <a class="text-dark-gray" [routerLink]="['/auth']" href="">Login Now?</a>
+              <!-- <button> <a class="text-main" (click)="openVerifyDialog()" data-bs-toggle="modal" data-bs-target="#exampleModal">Have Code?</a></button> -->
+              <button class="bg-transparent"> <a class="text-main" data-bs-toggle="modal" data-bs-target="#exampleModal">Have Code?</a></button>
+            </div>
+
+            <button class="primary w-100 my-4" type="submit" [disabled]="registerForm.invalid">Register</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Hi</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+
+
+          <form [formGroup]="verifyForm" (ngSubmit)="onVerifyAccount(verifyForm)">
+
+
+            <div class="col-12">
+              <div class="input-group mb-3 input-group-lg">
+                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-mobile-screen"></i></span>
+                <input formControlName="email" type="email" class="form-control input-lg"
+                  placeholder="Enter your E-mail" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <ng-container *ngIf="(verifyMail?.touched||verifyMail?.value)&& verifyMail?.errors" class="invalid">
+                <p class="text-danger" *ngIf="verifyMail?.getError('required')">Email is Required</p>
+                <p class="text-danger" *ngIf="verifyMail?.getError('email')">Email invalid format</p>
+              </ng-container>
+            </div>
+
+            <div class="col-12">
+              <div class="input-group mb-3 input-group-lg">
+                <span class="input-group-text"><i class="fa-solid fa-mobile-screen"></i></span>
+                <input formControlName="code" type="text" class="form-control input-lg" placeholder="Code"
+                  aria-label="Username">
+              </div>
+              <ng-container *ngIf="(code?.touched||code?.value)&& code?.errors" class="invalid">
+                <p class="text-danger" *ngIf="code?.getError('required')">Name is Required</p>
+              </ng-container>
+            </div>
+
+            <div class="mt-4 d-flex justify-content-between">
+              <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-light">ok</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>hi</h2>
+
+
+  <div class="row">
+    <form [formGroup]="verifyForm" (ngSubmit)="onVerifyAccount(verifyForm)">
+
+      <mat-dialog-content>
+      <div class="col-12">
+        <div class="input-group mb-3 input-group-lg">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-mobile-screen"></i></span>
+          <input formControlName="email" type="email" class="form-control input-lg"
+            placeholder="Enter your E-mail" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="input-group mb-3 input-group-lg">
+          <span class="input-group-text"><i class="fa-solid fa-mobile-screen"></i></span>
+          <input formControlName="code" type="text" class="form-control input-lg" placeholder="Code"
+            aria-label="Username">
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <div class="mt-4 d-flex justify-content-between">
+        <button type="button" mat-dialog-close="true" class="btn btn-light">Close</button>
+        <button type="submit" mat-dialog-close="false" class="btn btn-light">ok</button>
+      </div>
+    </mat-dialog-actions>
+
+    </form>
+  </div>
+
+
+

@@ -1,0 +1,18 @@
+$main-color: #009247;
+.page-title{
+  background-image: url(../../../assets/img/home/header-bg-svg.svg);
+  background-size: cover;
+  background-color: $main-color;
+  border-radius: 8px;
+  color: #fff;
+
+
+  span {
+    font-size: 25px;
+    font-weight: 400;
+
+  }
+}
+.img-table{
+  width: 10%;
+}

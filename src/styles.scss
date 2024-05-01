@@ -1,1 +1,104 @@
-/* You can add global styles to this file, and also import other style files */
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$newFoodApp-primary: mat.define-palette(mat.$indigo-palette);
+$newFoodApp-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$newFoodApp-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$newFoodApp-theme: mat.define-light-theme((
+  color: (
+    primary: $newFoodApp-primary,
+    accent: $newFoodApp-accent,
+    warn: $newFoodApp-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($newFoodApp-theme);
+
+.bg-dark-main{
+  background-color: rgba(31, 38, 62, 1) !important ;
+}
+.auth-card {
+  $main-color: rgba(74, 163, 90, 1);
+  $dark-color-gray: rgba(58, 58, 61, 1);
+  background-color: #fff;
+  border-radius: 16px;
+  //padding: 5rem;
+
+  h1 {
+    color: #494949;
+    font-weight: 700;
+    font-size: 25px;
+
+  }
+
+  p {
+    color: rgba(73, 73, 73, 0.6);
+  }
+  i{
+    color: rgba(131, 145, 161, 1);
+  }
+
+  .password{
+    .eye{
+      font-size: 19px;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .text-main {
+    color: $main-color;
+  }
+
+  .text-dark-gray {
+    color: $dark-color-gray;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+button {
+  border-radius: 8px;
+  border: none;
+
+  &.primary {
+    background-color:  rgba(74, 163, 90, 1);;
+    color: #fff;
+    padding: 0.7rem 0.5rem;
+    &:hover{
+      opacity: 0.7;
+    }
+  }
+  &.light {
+    background-color:  rgba(74, 163, 90, 1);;
+    color: #fff;
+    padding: 0.7rem 0.5rem;
+    &:hover{
+      opacity: 0.7;
+    }
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

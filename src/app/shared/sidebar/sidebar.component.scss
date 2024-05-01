@@ -1,0 +1,19 @@
+.sider-bar {
+  border-radius: 0px 58px 0px 0px;
+  .item{
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    margin: 5px 0px;
+    span{
+      margin: 0px 5px;
+    }
+  }
+  .active-ul{
+    background-color: #0092471A;
+  }
+}
+
+
+

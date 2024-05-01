@@ -1,0 +1,121 @@
+<section>
+  <div class="page-title">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h1>Recipes <span>Item</span></h1>
+          <p>You can now add your items that any user can order it from the Application and you can edit</p>
+        </div>
+        <div class="col-md-4 text-end">
+          <img class="w-50" src="../../../assets/img/categories/Group 48102127.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class=" d-flex justify-content-between align-items-center my-3">
+      <div>
+        <h2 class="h4">Recipes Table Details</h2>
+        <p>You can check all details</p>
+      </div>
+      <div>
+        <button class="primary" (click)="openAddEditCategories('AddEdit')">Add New Recipe</button>
+
+      </div>
+
+    </div>
+
+    <div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-form-field w-100" appearance="outline">
+              <mat-label>Clearable input</mat-label>
+              <input matInput type="text" [(ngModel)]="searchValue">
+              <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Tag</mat-label>
+              <mat-select  >
+                <mat-select-trigger>
+                </mat-select-trigger>
+                <mat-option *ngFor="let tag of tagesList"  [value]="tag.id">{{tag.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Categories</mat-label>
+              <mat-select  >
+                <mat-select-trigger>
+                </mat-select-trigger>
+                <mat-option *ngFor="let cat of catsListData" [value]="cat.id">{{cat.name}}</mat-option>
+
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <th>Name</th>
+          <th>img</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Tag</th>
+          <th>Category</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of listData?.data">
+            <td>{{row.name}}</td>
+            <td class="w-25"><img class="w-25" [src]="row.imagePath?(imgUrl+row.imagePath):dammyImg" alt=""></td>
+            <td>{{row.price}}</td>
+            <td>{{row.description}}</td>
+            <td>{{row.tag.name}}</td>
+            <td>
+              <span *ngFor="let cat of row.category">
+                {{cat.name}} <span *ngIf="row.category.length>1">,</span>
+              </span>
+            </td>
+            <td><button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openAddEditCategories('view',row)">
+                  <mat-icon>visibility</mat-icon>
+                  <span>View</span>
+                </button>
+
+                <button mat-menu-item (click)="openAddEditCategories('AddEdit',row)">
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit</span>
+                </button>
+
+                <button mat-menu-item (click)="DeleteCategories(row)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <mat-paginator *ngIf="listData" #paginator class="demo-paginator" (page)="handlePageEvent($event)"
+        [length]="listData.totalNumberOfRecords" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25]"
+        [pageIndex]="pageIndex" aria-label="Select page">
+      </mat-paginator>
+    </div>
+
+
+
+  </div>
+
+</section>

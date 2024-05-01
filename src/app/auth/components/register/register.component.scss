@@ -1,0 +1,14 @@
+.auth {
+ background: linear-gradient(rgba(55, 140, 47, 0.63),rgba(0, 0, 0, 0.62));
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .image-portoflio{
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+  }
+  .invalid p{
+    color: #000;
+  }
+}

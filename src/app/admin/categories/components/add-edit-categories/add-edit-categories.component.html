@@ -1,0 +1,22 @@
+
+<section>
+  <div class="container">
+    <div class="title d-flex justify-content-between d-flex m-2">
+      <h1 class="fw-bold"  *ngIf="!CategoryId"> Add Catergory</h1>
+      <h1 class="fw-bold" *ngIf="CategoryId">Edit Catergory</h1>
+      <div class="close" (click)="onNoClick()"><i class="fa-regular fa-circle-xmark text-danger"></i></div>
+    </div>
+
+
+    <div class="my-5 mx-2" >
+
+        <input placeholder="Category Name" class="form-control" [(ngModel)]="CategoryName" [disabled]="isViewMode">
+    </div>
+
+    <div   class="text-end m-3">
+      <button class="primary p-3" [ngStyle]="{'opacity': isViewMode ? '0.7' : '1'}"  [mat-dialog-close]="CategoryName" [disabled]="isViewMode" >Save</button>
+    </div>
+  </div>
+
+
+</section>

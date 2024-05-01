@@ -1,0 +1,78 @@
+<section>
+<div class="page-title">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+          <h1>Categories <span>Item</span></h1>
+          <p>You can now add your items that any user can order it from the Application and you can edit</p>
+      </div>
+      <div class="col-md-4 text-end">
+        <img class="w-50" src="../../../assets/img/categories/Group 48102127.svg" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div >
+  <div class=" d-flex justify-content-between align-items-center my-3">
+    <div>
+      <h2 class="h4">Categories Table Details</h2>
+      <p>You can check all details</p>
+    </div>
+    <div>
+      <button class="primary" (click)="openAddEditCategories('AddEdit')">Add New Category</button>
+
+    </div>
+
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+       <th>Name</th>
+       <th>Creation Date</th>
+       <th>Modification Date</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of listData?.data">
+        <td>{{row.name}}</td>
+        <td>{{row.creationDate | date:"dd-MM-yy hh:mm a"}}</td>
+        <td>{{row.modificationDate | date:"dd-MM-yy hh:mm a"}}</td>
+        <td><button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item  (click)="openAddEditCategories('view',row)">
+            <mat-icon>visibility</mat-icon>
+            <span>View</span>
+          </button>
+
+          <button  mat-menu-item  (click)="openAddEditCategories('AddEdit',row)">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button>
+
+          <button mat-menu-item (click)="DeleteCategories(row)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <mat-paginator *ngIf="listData" #paginator
+               class="demo-paginator"
+               (page)="handlePageEvent($event)"
+               [length]="listData.totalNumberOfRecords"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="[5, 10, 25]"
+               [pageIndex]="pageIndex"
+               aria-label="Select page">
+</mat-paginator>
+
+</div>
+
+</section>
+
+
